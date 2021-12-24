@@ -13,7 +13,7 @@ const gameBoard = (function() {
   const markSpace = () => {
     boardSpaces.forEach((boardSpace) => {
       boardSpace.addEventListener('click', (e) => {
-        boardSpace.textContent = 'x';
+        boardSpace.textContent = playerDetails.playerTwo.playerMarker;
         updateArr();
       });
     });
@@ -32,16 +32,29 @@ const displayController = (function() {
   
 })();
 
-const playerFactory = (playerName, playerMarker) => {
-
-  const sayHello = () => console.log(`Hello ${playerName}, you're playing as ${playerMarker}`);
-  
-  return {
-    sayHello,
-    playerName,
-    playerMarker,
+const playerDetails = (function() {
+  const playerFactory = (playerName, playerMarker) => {
+    const sayHello = () => console.log(`Hello ${playerName}, you're playing as ${playerMarker}`);
+    return {
+      playerName, 
+      playerMarker, 
+      sayHello
+    };
   };
-};
+
+  const playerOneName = prompt('Hello Player One, please enter your name');
+  const playerTwoName = prompt('Hello Player Two, please enter your name');
+  
+
+  const playerOne = playerFactory(playerOneName, 'X');
+  const playerTwo = playerFactory(playerTwoName, 'O');
+
+  return {
+    playerOne,
+    playerTwo,
+  };
+})();
+
 
 gameBoard.markSpace();
 
