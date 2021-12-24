@@ -1,28 +1,27 @@
 const gameBoard = (function() {
 
-  const _spaceContents = ['x', 'o', 'x', 'o', 'x', 'o', 'x', 'x', 'x'];
+  const boardSpaces = document.querySelectorAll(".boardSpace");
+
+  const _spaceContents = ['', '', '', '', '', '', '', '', ''];
   
-  const boardSpaces = [document.querySelectorAll(".boardSpace")];
-  
-  const populateSpaces = () => {
-    boardSpaces.forEach((boardSpace) => { 
+  const updateArr = () => {
     for (let i = 0; i <= _spaceContents.length; i++) {
-      boardSpace[i].textContent = `${_spaceContents[i]}`;
-      };
-    });
+      _spaceContents[i] = boardSpaces[i].textContent;
+    };
   };
 
-  // const markSpace = () => {
-  //   boardSpaces.forEach((boardSpace) => {
-  //     boardSpace.addEventListener('click', (e) => {
-  //       boardSpace.value = playerMarker;
-  //     } )
-  //   })
-  // }
+  const markSpace = () => {
+    boardSpaces.forEach((boardSpace) => {
+      boardSpace.addEventListener('click', (e) => {
+        boardSpace.textContent = 'x';
+        updateArr();
+      });
+    });
+  }
 
   return {
-    populateSpaces,
     markSpace,
+    _spaceContents
   };
   
   
@@ -44,6 +43,6 @@ const playerFactory = (playerName, playerMarker) => {
   };
 };
 
-gameBoard.populateSpaces();
+gameBoard.markSpace();
 
 // const Scott = playerFactory('Scott', 'x');
