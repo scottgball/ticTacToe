@@ -1,0 +1,28 @@
+#boardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 400px;
+  width: 400px;
+}
+
+.boardSpace {
+  border: 5px solid red;
+  background-color: white;
+}
+
+.topRow {
+  border-top: 0;
+}
+
+.bottomRow {
+  border-bottom: 0;
+}
+
+.leftColumn {
+  border-left: 0;
+}
+
+.rightColumn {
+  border-right: 0;
+}
+
