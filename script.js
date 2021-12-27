@@ -47,9 +47,12 @@ const gameBoard = (function() {
 
   boardSpaces.forEach((boardSpace) => {
     boardSpace.addEventListener('click', (e) => {
-      boardSpace.textContent = currentPlayerMarker;
+      if (boardSpace.textContent === '') {
+        boardSpace.textContent = currentPlayerMarker;
+      };
       toggleCurrentPlayer();
       updateArr();
+      checkForWin();
       
     });
   });
@@ -61,9 +64,46 @@ const gameBoard = (function() {
       _spaceContents[i] = boardSpaces[i].textContent;
   };
 
+  const checkForWin = () => {
+    if ((_spaceContents[0] === 'X') && (_spaceContents[1] === 'X') && (_spaceContents[2] === 'X')) {
+      alert("Player 1 Wins!")
+    } else if ((_spaceContents[3] === 'X') && (_spaceContents[4] === 'X') && (_spaceContents[5] === 'X')) {
+      alert("Player 1 Wins!")
+    } else if ((_spaceContents[6] === 'X') && (_spaceContents[7] === 'X') && (_spaceContents[8] === 'X')) {
+      alert("Player 1 Wins!")
+    } else if ((_spaceContents[0] === 'X') && (_spaceContents[3] === 'X') && (_spaceContents[6] === 'X')) {
+      alert("Player 1 Wins!")
+    } else if ((_spaceContents[1] === 'X') && (_spaceContents[4] === 'X') && (_spaceContents[7] === 'X')) {
+      alert("Player 1 Wins!")
+    } else if ((_spaceContents[2] === 'X') && (_spaceContents[5] === 'X') && (_spaceContents[8] === 'X')) {
+      alert("Player 1 Wins!")
+    } else if ((_spaceContents[0] === 'X') && (_spaceContents[4] === 'X') && (_spaceContents[8] === 'X')) {
+      alert("Player 1 Wins!")
+    } else if ((_spaceContents[2] === 'X') && (_spaceContents[4] === 'X') && (_spaceContents[6] === 'X')) {
+      alert("Player 1 Wins!")
+    } else if ((_spaceContents[0] === 'O') && (_spaceContents[1] === 'O') && (_spaceContents[2] === 'O')) {
+      alert("Player 2 Wins!")
+    } else if ((_spaceContents[3] === 'O') && (_spaceContents[4] === 'O') && (_spaceContents[5] === 'O')) {
+      alert("Player 2 Wins!")
+    } else if ((_spaceContents[6] === 'O') && (_spaceContents[7] === 'O') && (_spaceContents[8] === 'O')) {
+      alert("Player 2 Wins!")
+    } else if ((_spaceContents[0] === 'O') && (_spaceContents[3] === 'O') && (_spaceContents[6] === 'O')) {
+      alert("Player 2 Wins!")
+    } else if ((_spaceContents[1] === 'O') && (_spaceContents[4] === 'O') && (_spaceContents[7] === 'O')) {
+      alert("Player 2 Wins!")
+    } else if ((_spaceContents[2] === 'O') && (_spaceContents[5] === 'O') && (_spaceContents[8] === 'O')) {
+      alert("Player 2 Wins!")
+    } else if ((_spaceContents[0] === 'O') && (_spaceContents[4] === 'O') && (_spaceContents[8] === 'O')) {
+      alert("Player 2 Wins!")
+    } else if ((_spaceContents[2] === 'O') && (_spaceContents[4] === 'O') && (_spaceContents[6] === 'O')) {
+      alert("Player 2 Wins!")
+    } else if (!_spaceContents.includes('')) {
+      alert("It's a draw!")
+    };
+  };
+
   return {
-    updateArr,
-    _spaceContents
+    
   };
   
   
