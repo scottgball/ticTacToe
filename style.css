@@ -1,4 +1,8 @@
-#boardGrid {
+.boardGridPreGame {
+  display: none;
+}
+
+.boardGridDuringGame {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   height: 400px;
@@ -26,3 +30,7 @@
   border-right: 0;
 }
 
+#formContainer {
+  width: 100%;
+  height: 100%;
+}

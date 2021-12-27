@@ -11,12 +11,36 @@ const playerDetails = (function() {
   
   
 
-  const playerOneName = prompt('Hello Player One, please enter your name');
-  const playerTwoName = prompt('Hello Player Two, please enter your name');
-  
+  // const playerOneName = prompt('Hello Player One, please enter your name');
+  // const playerTwoName = prompt('Hello Player Two, please enter your name');
+  const playerOne = playerFactory('Player 1', 'X');
+  const playerTwo = playerFactory('Player 2', 'O');
 
-  const playerOne = playerFactory(playerOneName, 'X');
-  const playerTwo = playerFactory(playerTwoName, 'O');
+  const boardGrid = document.querySelector('#boardGrid');
+  const formContainer = document.querySelector('#formContainer');
+  const form = document.querySelector('form');
+  const playerOneEntry = document.querySelector('#playerOneEntry');
+  const playerTwoEntry = document.querySelector('#playerTwoEntry');
+
+  
+  form.addEventListener('submit', (e) => {
+      const playerOneName = playerOneEntry.value;
+      const playerTwoName = playerTwoEntry.value;
+      playerOne.playerName = playerOneName;
+      playerTwo.playerName = playerTwoName;
+      event.preventDefault();  
+      closeForm();
+      revealGrid();
+    });
+
+  const closeForm = () => {
+    formContainer.style.display = "none"
+  };
+
+  const revealGrid = () => {
+    boardGrid.classList.remove('boardGridPreGame')
+    boardGrid.classList.add('boardGridDuringGame')
+  };
 
   
 
@@ -26,6 +50,7 @@ const playerDetails = (function() {
     playerTwo,
   };
 })();
+
 
 
 const gameBoard = (function() {

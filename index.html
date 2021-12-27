@@ -6,8 +6,25 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Let's Play A Game!</h1>
-  <div id="boardGrid">
+  <h1>Let's Play Tic-Tac-Toe!</h1>
+  <div id="formContainer">
+    <form id="playerForm" action="" method="">
+      <ul>
+        <li>
+          <label for="playerOneEnterName">Player One, please enter your name</label>
+          <input type="text" id="playerOneEntry" name="playerOneEnterName" required>
+        </li>
+        <li>
+          <label for="playerTwoEnterName">Player Two, please enter your name</label>
+          <input type="text" id="playerTwoEntry" name="playerTwoEnterName" required>
+        </li>
+        <li>
+          <button type="submit">Start Game</button>
+        </li>
+      </ul>
+    </form>
+   </div> 
+  <div id="boardGrid" class="boardGridPreGame">
     <div id="spaceOne" class="boardSpace topRow leftColumn"></div>
     <div id="spaceTwo" class="boardSpace topRow"></div>
     <div id="spaceThree" class="boardSpace topRow rightColumn"></div>
