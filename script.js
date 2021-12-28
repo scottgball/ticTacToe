@@ -16,11 +16,14 @@ const playerDetails = (function() {
   const playerOne = playerFactory('Player 1', 'X');
   const playerTwo = playerFactory('Player 2', 'O');
 
-  const boardGrid = document.querySelector('#boardGrid');
+  const boardContainer = document.querySelector('#boardContainer');
   const formContainer = document.querySelector('#formContainer');
   const form = document.querySelector('form');
   const playerOneEntry = document.querySelector('#playerOneEntry');
   const playerTwoEntry = document.querySelector('#playerTwoEntry');
+  const playerOneInfo = document.querySelector('#playerOneInfo');
+  const playerTwoInfo = document.querySelector('#playerTwoInfo');
+  
 
   
   form.addEventListener('submit', (e) => {
@@ -30,17 +33,24 @@ const playerDetails = (function() {
       playerTwo.playerName = playerTwoName;
       event.preventDefault();  
       closeForm();
-      revealGrid();
+      revealBoard();
+      populatePlayerInfo();
     });
 
   const closeForm = () => {
     formContainer.style.display = "none"
   };
 
-  const revealGrid = () => {
-    boardGrid.classList.remove('boardGridPreGame')
-    boardGrid.classList.add('boardGridDuringGame')
+  const revealBoard = () => {
+    boardContainer.classList.remove('boardContainerPreGame')
+    boardContainer.classList.add('boardContainerDuringGame')
   };
+
+  const populatePlayerInfo = () => {
+    playerOneInfo.textContent = `${playerOne.playerName} is playing as X`;
+    playerTwoInfo.textContent = `${playerTwo.playerName} is playing as O`;
+  };
+
 
   
 
@@ -57,8 +67,11 @@ const gameBoard = (function() {
 
   
   const boardSpaces = document.querySelectorAll(".boardSpace");
+  const resultInfo = document.querySelector('#resultInfo');
+  const resetButton = document.querySelector('#resetButton');
+  const newGameButton = document.querySelector('#newGameButton');
 
-  let currentPlayerMarker = playerDetails.playerTwo.playerMarker;
+  let currentPlayerMarker = playerDetails.playerOne.playerMarker;
 
   
 
@@ -72,15 +85,27 @@ const gameBoard = (function() {
 
   boardSpaces.forEach((boardSpace) => {
     boardSpace.addEventListener('click', (e) => {
-      if (boardSpace.textContent === '') {
+      if (boardSpace.textContent === '' && (anyoneWon === false)) {
         boardSpace.textContent = currentPlayerMarker;
       };
       toggleCurrentPlayer();
       updateArr();
       checkForWin();
-      
     });
   });
+
+  resetButton.addEventListener('click', (e) => {
+    resetGrid();
+    updateArr();
+    anyoneWon = false;
+    currentPlayerMarker = playerDetails.playerOne.playerMarker;
+
+  })
+
+  newGameButton.addEventListener('click', (e) => {
+    location.reload()
+  });
+
 
   const _spaceContents = ['', '', '', '', '', '', '', '', ''];
   
@@ -89,41 +114,78 @@ const gameBoard = (function() {
       _spaceContents[i] = boardSpaces[i].textContent;
   };
 
+  const resetGrid = () => {
+    boardSpaces.forEach((boardSpace) => {
+      boardSpace.textContent = '';
+    });
+  };
+
+  const disableGrid = () => {
+    boardSpaces.forEach((boardSpace) => {
+      boardSpace.removeEventListener('click', (e) => {
+        if (boardSpace.textContent === '') {
+          boardSpace.textContent = currentPlayerMarker;
+        };
+        toggleCurrentPlayer();
+        updateArr();
+        checkForWin();
+      });
+    });
+  };
+
+  let anyoneWon = false;
+
   const checkForWin = () => {
     if ((_spaceContents[0] === 'X') && (_spaceContents[1] === 'X') && (_spaceContents[2] === 'X')) {
-      alert("Player 1 Wins!")
+      resultInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
+      anyoneWon = true;
     } else if ((_spaceContents[3] === 'X') && (_spaceContents[4] === 'X') && (_spaceContents[5] === 'X')) {
-      alert("Player 1 Wins!")
+      resultInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
+      anyoneWon = true;
     } else if ((_spaceContents[6] === 'X') && (_spaceContents[7] === 'X') && (_spaceContents[8] === 'X')) {
-      alert("Player 1 Wins!")
+      resultInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
+      anyoneWon = true;
     } else if ((_spaceContents[0] === 'X') && (_spaceContents[3] === 'X') && (_spaceContents[6] === 'X')) {
-      alert("Player 1 Wins!")
+      resultInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
+      anyoneWon = true;
     } else if ((_spaceContents[1] === 'X') && (_spaceContents[4] === 'X') && (_spaceContents[7] === 'X')) {
-      alert("Player 1 Wins!")
+      resultInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
+      anyoneWon = true;
     } else if ((_spaceContents[2] === 'X') && (_spaceContents[5] === 'X') && (_spaceContents[8] === 'X')) {
-      alert("Player 1 Wins!")
+      resultInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
+      anyoneWon = true;
     } else if ((_spaceContents[0] === 'X') && (_spaceContents[4] === 'X') && (_spaceContents[8] === 'X')) {
-      alert("Player 1 Wins!")
+      resultInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
+      anyoneWon = true;
     } else if ((_spaceContents[2] === 'X') && (_spaceContents[4] === 'X') && (_spaceContents[6] === 'X')) {
-      alert("Player 1 Wins!")
+      resultInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
+      anyoneWon = true;
     } else if ((_spaceContents[0] === 'O') && (_spaceContents[1] === 'O') && (_spaceContents[2] === 'O')) {
-      alert("Player 2 Wins!")
+      resultInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
+      anyoneWon = true;
     } else if ((_spaceContents[3] === 'O') && (_spaceContents[4] === 'O') && (_spaceContents[5] === 'O')) {
-      alert("Player 2 Wins!")
+      resultInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
+      anyoneWon = true;
     } else if ((_spaceContents[6] === 'O') && (_spaceContents[7] === 'O') && (_spaceContents[8] === 'O')) {
-      alert("Player 2 Wins!")
+      resultInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
+      anyoneWon = true;
     } else if ((_spaceContents[0] === 'O') && (_spaceContents[3] === 'O') && (_spaceContents[6] === 'O')) {
-      alert("Player 2 Wins!")
+      resultInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
+      anyoneWon = true;
     } else if ((_spaceContents[1] === 'O') && (_spaceContents[4] === 'O') && (_spaceContents[7] === 'O')) {
-      alert("Player 2 Wins!")
+      resultInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
+      anyoneWon = true;
     } else if ((_spaceContents[2] === 'O') && (_spaceContents[5] === 'O') && (_spaceContents[8] === 'O')) {
-      alert("Player 2 Wins!")
+      resultInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
+      anyoneWon = true;
     } else if ((_spaceContents[0] === 'O') && (_spaceContents[4] === 'O') && (_spaceContents[8] === 'O')) {
-      alert("Player 2 Wins!")
+      resultInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
+      anyoneWon = true;
     } else if ((_spaceContents[2] === 'O') && (_spaceContents[4] === 'O') && (_spaceContents[6] === 'O')) {
-      alert("Player 2 Wins!")
+      resultInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
+      anyoneWon = true;
     } else if (!_spaceContents.includes('')) {
-      alert("It's a draw!")
+      resultInfo.textContent = "It's a draw!"
     };
   };
 

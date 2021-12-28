@@ -1,8 +1,12 @@
-.boardGridPreGame {
+.boardContainerPreGame {
   display: none;
 }
 
-.boardGridDuringGame {
+.boardContainerDuringGame {
+  display: block;
+}
+
+#boardGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   height: 400px;
