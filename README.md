@@ -1,1 +1,9 @@
-# tickTackToe
+# ticTacToe
+
+This project was meant to serve as an introduction to using factory functions and modules to create objects and organize code. One stated goal was to have as little global code as possible, and my solution was to generally organize everything inside a Player Details module and a Game Board module.
+
+The game itself functions through the use of event listeners. When a player clicks a targeted space, an event listener fires a sequence of helper functions in order to mark that space, update the array storing the values of the spaces, and check for a winner. It took me a while to arrive at this solution for controlling the game, as initially I was trying to piece together a complex sequence of function calls not attached to the event listener and only using the event listener to update the text content of the clicked space. For example, I was trying to alternate player turns using a loop, but I couldn't figure out how to make the loop wait for a player to select a space before moving onto the next iteration, and so the loop would just run to completion without any player making a selection. When I realized I only needed the functions to be called after a space was clicked, I got the game working pretty quickly. I think I would have arrived at this solution much quicker if I had outlined how everything would work before I started coding, so that was a good lesson learned.
+
+For styling I primarily used a mixture of Flexbox and CSS Grid. Flexbox controls most of the page layout, while Grid creates the gameboard grid itself. One thing I learned was that I could use flexbox on a div in order to center that div's text (treat the div as the parent, even though no child of that div exists in the html. The div.textContent is treated as a child, and thus can easily be centered by using justify-content and align-items properties on the div).
+
+A future improvement to the game would be adding an AI and giving the option to play against the computer or against another player. I know it's possible to build an unbeatable AI, but it would be interesting to build an AI with multiple levels (begginner, intermediate, unbeatable).
