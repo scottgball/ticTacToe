@@ -1,6 +1,7 @@
 body {
   background-color: rgb(36, 138, 82);
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
   align-items: center;
 }
@@ -57,11 +58,19 @@ p {
   font-size: 24px;
   font-weight: bold;
   color:tan;
+  margin: 5px;
+}
+
+#gameInfo {
+  color: rgb(253, 103, 103);
+  font-size: 32px;
+  font-weight: bold;
 }
 
 #buttonContainer {
   display: flex;
   justify-content: space-evenly;
+  margin: 10px;
 }
 
 .boardContainerPreGame {
@@ -69,7 +78,9 @@ p {
 }
 
 .boardContainerDuringGame {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
 }
 
 #boardGrid {
@@ -79,8 +90,6 @@ p {
   height: 400px;
   width: 400px;
   margin-top: 50px;
-  
-  
 }
 
 .boardSpace {
@@ -89,7 +98,7 @@ p {
   padding: 0;
   border: 5px solid tan;
   font-size: 60px;
-  color: gainsboro;
+  color: rgb(253, 103, 103);
   display: flex;
   justify-content: center;
   align-items: center;

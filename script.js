@@ -9,12 +9,8 @@ const playerDetails = (function() {
     };
   };
   
-  
-
-  // const playerOneName = prompt('Hello Player One, please enter your name');
-  // const playerTwoName = prompt('Hello Player Two, please enter your name');
-  const playerOne = playerFactory('Player 1', 'X');
-  const playerTwo = playerFactory('Player 2', 'O');
+  const playerOne = playerFactory('Player One', 'X');
+  const playerTwo = playerFactory('Player Two', 'O');
 
   const boardContainer = document.querySelector('#boardContainer');
   const formContainer = document.querySelector('#formContainer');
@@ -24,13 +20,19 @@ const playerDetails = (function() {
   const playerOneInfo = document.querySelector('#playerOneInfo');
   const playerTwoInfo = document.querySelector('#playerTwoInfo');
   
-
-  
   form.addEventListener('submit', (e) => {
-      const playerOneName = playerOneEntry.value;
-      const playerTwoName = playerTwoEntry.value;
-      playerOne.playerName = playerOneName;
-      playerTwo.playerName = playerTwoName;
+      let playerOneName = playerOneEntry.value;
+      let playerTwoName = playerTwoEntry.value;
+      if (playerOneEntry.value !== '' ) {
+        playerOneName = playerOneEntry.value;
+      } else {
+        playerOneName = 'Player One'
+      };
+      if (playerTwoEntry.value !== '') {
+        playerTwoName = playerTwoEntry.value;
+      } else {
+        playerTwoName = 'Player Two'
+      };
       event.preventDefault();  
       closeForm();
       revealBoard();
@@ -56,6 +58,7 @@ const playerDetails = (function() {
 
 
   return {
+    playerOneEntry,
     playerOne,
     playerTwo,
   };
@@ -105,6 +108,7 @@ const gameBoard = (function() {
     updateArr();
     anyoneWon = false;
     currentPlayerMarker = playerDetails.playerOne.playerMarker;
+    gameInfo.textContent = `${playerDetails.playerOne.playerName}, it's your turn`;;
 
   })
 
