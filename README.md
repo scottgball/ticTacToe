@@ -7,3 +7,5 @@ The game itself functions through the use of event listeners. When a player clic
 For styling I primarily used a mixture of Flexbox and CSS Grid. Flexbox controls most of the page layout, while Grid creates the gameboard grid itself. One thing I learned was that I could use flexbox on a div in order to center that div's text (treat the div as the parent, even though no child of that div exists in the html. The div.textContent is treated as a child, and thus can easily be centered by using justify-content and align-items properties on the div).
 
 A future improvement to the game would be adding an AI and giving the option to play against the computer or against another player. I know it's possible to build an unbeatable AI, but it would be interesting to build an AI with multiple levels (begginner, intermediate, unbeatable).
+
+An cleanup improvement would be finding a more elegant way to write the logic that checks for a win or draw. The current iteration works fine, but it's verbose and messy and has much repetition.
