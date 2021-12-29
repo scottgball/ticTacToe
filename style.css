@@ -32,14 +32,6 @@ button:hover {
   background-color: rgb(180, 180, 180);
 }
 
-#formContainer {
-  
-}
-
-#playerForm {
-  
-}
-
 ul {
   list-style: none;
   display: flex;
@@ -102,7 +94,6 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
 
 .topRow {
