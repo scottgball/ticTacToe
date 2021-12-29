@@ -6,17 +6,17 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Let's Play Tic-Tac-Toe!</h1>
+  <h1>Tic-Tac-Toe</h1>
   <div id="formContainer">
     <form id="playerForm" action="" method="">
       <ul>
         <li>
           <label for="playerOneEnterName">Player One, please enter your name</label>
-          <input type="text" id="playerOneEntry" name="playerOneEnterName" required>
+          <input type="text" id="playerOneEntry" name="playerOneEnterName" placeholder="Player One">
         </li>
         <li>
           <label for="playerTwoEnterName">Player Two, please enter your name</label>
-          <input type="text" id="playerTwoEntry" name="playerTwoEnterName" required>
+          <input type="text" id="playerTwoEntry" name="playerTwoEnterName" placeholder="Player Two">
         </li>
         <li>
           <button type="submit">Start Game</button>
@@ -28,7 +28,7 @@
      <div id="textContainer">
        <p id="playerOneInfo"></p>
        <p id="playerTwoInfo"></p>
-       <p id="resultInfo"></p>
+       <p id="gameInfo"></p>
      </div>
      <div id="buttonContainer">
       <button id="resetButton">Reset Game</button>

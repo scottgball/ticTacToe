@@ -35,6 +35,7 @@ const playerDetails = (function() {
       closeForm();
       revealBoard();
       populatePlayerInfo();
+      gameInfo.textContent = `${playerOneName}, it's your turn`;
     });
 
   const closeForm = () => {
@@ -51,7 +52,6 @@ const playerDetails = (function() {
     playerTwoInfo.textContent = `${playerTwo.playerName} is playing as O`;
   };
 
-
   
 
 
@@ -67,19 +67,24 @@ const gameBoard = (function() {
 
   
   const boardSpaces = document.querySelectorAll(".boardSpace");
-  const resultInfo = document.querySelector('#resultInfo');
+  const gameInfo = document.querySelector('#gameInfo');
   const resetButton = document.querySelector('#resetButton');
   const newGameButton = document.querySelector('#newGameButton');
 
   let currentPlayerMarker = playerDetails.playerOne.playerMarker;
+  let currentPlayerName = playerDetails.playerOne.playerName;
+
+  
 
   
 
   const toggleCurrentPlayer = () => {
     if (currentPlayerMarker === playerDetails.playerOne.playerMarker) {
-      return currentPlayerMarker = playerDetails.playerTwo.playerMarker;
+      currentPlayerMarker = playerDetails.playerTwo.playerMarker;
+      currentPlayerName = playerDetails.playerTwo.playerName;
     } else if (currentPlayerMarker === playerDetails.playerTwo.playerMarker) {
-      return currentPlayerMarker = playerDetails.playerOne.playerMarker;
+      currentPlayerMarker = playerDetails.playerOne.playerMarker;
+      currentPlayerName = playerDetails.playerOne.playerName;
     };
  };
 
@@ -90,6 +95,7 @@ const gameBoard = (function() {
       };
       toggleCurrentPlayer();
       updateArr();
+      updateText();
       checkForWin();
     });
   });
@@ -133,64 +139,68 @@ const gameBoard = (function() {
     });
   };
 
+  const updateText = () => {
+    gameInfo.textContent = `${currentPlayerName}, it's your turn`;
+  }
+
   let anyoneWon = false;
 
   const checkForWin = () => {
     if ((_spaceContents[0] === 'X') && (_spaceContents[1] === 'X') && (_spaceContents[2] === 'X')) {
-      resultInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
+      gameInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
       anyoneWon = true;
     } else if ((_spaceContents[3] === 'X') && (_spaceContents[4] === 'X') && (_spaceContents[5] === 'X')) {
-      resultInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
+      gameInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
       anyoneWon = true;
     } else if ((_spaceContents[6] === 'X') && (_spaceContents[7] === 'X') && (_spaceContents[8] === 'X')) {
-      resultInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
+      gameInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
       anyoneWon = true;
     } else if ((_spaceContents[0] === 'X') && (_spaceContents[3] === 'X') && (_spaceContents[6] === 'X')) {
-      resultInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
+      gameInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
       anyoneWon = true;
     } else if ((_spaceContents[1] === 'X') && (_spaceContents[4] === 'X') && (_spaceContents[7] === 'X')) {
-      resultInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
+      gameInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
       anyoneWon = true;
     } else if ((_spaceContents[2] === 'X') && (_spaceContents[5] === 'X') && (_spaceContents[8] === 'X')) {
-      resultInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
+      gameInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
       anyoneWon = true;
     } else if ((_spaceContents[0] === 'X') && (_spaceContents[4] === 'X') && (_spaceContents[8] === 'X')) {
-      resultInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
+      gameInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
       anyoneWon = true;
     } else if ((_spaceContents[2] === 'X') && (_spaceContents[4] === 'X') && (_spaceContents[6] === 'X')) {
-      resultInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
+      gameInfo.textContent = `${playerDetails.playerOne.playerName} wins!`;
       anyoneWon = true;
     } else if ((_spaceContents[0] === 'O') && (_spaceContents[1] === 'O') && (_spaceContents[2] === 'O')) {
-      resultInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
+      gameInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
       anyoneWon = true;
     } else if ((_spaceContents[3] === 'O') && (_spaceContents[4] === 'O') && (_spaceContents[5] === 'O')) {
-      resultInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
+      gameInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
       anyoneWon = true;
     } else if ((_spaceContents[6] === 'O') && (_spaceContents[7] === 'O') && (_spaceContents[8] === 'O')) {
-      resultInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
+      gameInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
       anyoneWon = true;
     } else if ((_spaceContents[0] === 'O') && (_spaceContents[3] === 'O') && (_spaceContents[6] === 'O')) {
-      resultInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
+      gameInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
       anyoneWon = true;
     } else if ((_spaceContents[1] === 'O') && (_spaceContents[4] === 'O') && (_spaceContents[7] === 'O')) {
-      resultInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
+      gameInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
       anyoneWon = true;
     } else if ((_spaceContents[2] === 'O') && (_spaceContents[5] === 'O') && (_spaceContents[8] === 'O')) {
-      resultInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
+      gameInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
       anyoneWon = true;
     } else if ((_spaceContents[0] === 'O') && (_spaceContents[4] === 'O') && (_spaceContents[8] === 'O')) {
-      resultInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
+      gameInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
       anyoneWon = true;
     } else if ((_spaceContents[2] === 'O') && (_spaceContents[4] === 'O') && (_spaceContents[6] === 'O')) {
-      resultInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
+      gameInfo.textContent = `${playerDetails.playerTwo.playerName} wins!`;
       anyoneWon = true;
     } else if (!_spaceContents.includes('')) {
-      resultInfo.textContent = "It's a draw!"
+      gameInfo.textContent = "It's a draw!"
     };
   };
 
   return {
-    
+    updateText,
   };
   
   
