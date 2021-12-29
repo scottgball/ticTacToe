@@ -1,11 +1,9 @@
 const playerDetails = (function() {
 
   const playerFactory = (playerName, playerMarker) => {
-    const sayHello = () => console.log(`Hello ${playerName}, you're playing as ${playerMarker}`);
     return {
       playerName, 
       playerMarker, 
-      sayHello
     };
   };
   
@@ -54,9 +52,6 @@ const playerDetails = (function() {
     playerTwoInfo.textContent = `${playerTwo.playerName} is playing as O`;
   };
 
-  
-
-
   return {
     playerOneEntry,
     playerOne,
@@ -65,31 +60,17 @@ const playerDetails = (function() {
 })();
 
 
-
 const gameBoard = (function() {
 
-  
   const boardSpaces = document.querySelectorAll(".boardSpace");
   const gameInfo = document.querySelector('#gameInfo');
   const resetButton = document.querySelector('#resetButton');
   const newGameButton = document.querySelector('#newGameButton');
+  const _spaceContents = ['', '', '', '', '', '', '', '', ''];
+  let anyoneWon = false;
 
   let currentPlayerMarker = playerDetails.playerOne.playerMarker;
   let currentPlayerName = playerDetails.playerOne.playerName;
-
-  
-
-  
-
-  const toggleCurrentPlayer = () => {
-    if (currentPlayerMarker === playerDetails.playerOne.playerMarker) {
-      currentPlayerMarker = playerDetails.playerTwo.playerMarker;
-      currentPlayerName = playerDetails.playerTwo.playerName;
-    } else if (currentPlayerMarker === playerDetails.playerTwo.playerMarker) {
-      currentPlayerMarker = playerDetails.playerOne.playerMarker;
-      currentPlayerName = playerDetails.playerOne.playerName;
-    };
- };
 
   boardSpaces.forEach((boardSpace) => {
     boardSpace.addEventListener('click', (e) => {
@@ -109,15 +90,21 @@ const gameBoard = (function() {
     anyoneWon = false;
     currentPlayerMarker = playerDetails.playerOne.playerMarker;
     gameInfo.textContent = `${playerDetails.playerOne.playerName}, it's your turn`;;
-
   })
 
   newGameButton.addEventListener('click', (e) => {
     location.reload()
   });
 
-
-  const _spaceContents = ['', '', '', '', '', '', '', '', ''];
+  const toggleCurrentPlayer = () => {
+    if (currentPlayerMarker === playerDetails.playerOne.playerMarker) {
+      currentPlayerMarker = playerDetails.playerTwo.playerMarker;
+      currentPlayerName = playerDetails.playerTwo.playerName;
+    } else if (currentPlayerMarker === playerDetails.playerTwo.playerMarker) {
+      currentPlayerMarker = playerDetails.playerOne.playerMarker;
+      currentPlayerName = playerDetails.playerOne.playerName;
+    };
+ };
   
   const updateArr = () => {
     for (let i = 0; i < _spaceContents.length; i++)
@@ -130,24 +117,9 @@ const gameBoard = (function() {
     });
   };
 
-  const disableGrid = () => {
-    boardSpaces.forEach((boardSpace) => {
-      boardSpace.removeEventListener('click', (e) => {
-        if (boardSpace.textContent === '') {
-          boardSpace.textContent = currentPlayerMarker;
-        };
-        toggleCurrentPlayer();
-        updateArr();
-        checkForWin();
-      });
-    });
-  };
-
   const updateText = () => {
     gameInfo.textContent = `${currentPlayerName}, it's your turn`;
-  }
-
-  let anyoneWon = false;
+  };
 
   const checkForWin = () => {
     if ((_spaceContents[0] === 'X') && (_spaceContents[1] === 'X') && (_spaceContents[2] === 'X')) {
@@ -206,28 +178,9 @@ const gameBoard = (function() {
   return {
     updateText,
   };
-  
-  
 })();
 
 const gameController = (function() {
-
-  
-  
-  
-  
-
-  // playerOneSelect();
-  // updateArr();
-  // playerTwoSelect();
-  // updateArr();
-  
-
-  
-
-  
-
-  
 
   return {
   
